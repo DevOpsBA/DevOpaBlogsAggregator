@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -11,11 +10,15 @@ func TitleCreator(i int, str string) string {
 
 	title := strconv.Itoa(i)
 
+	exceptionChar := "+=[]:;«,./? |-()\\'"
+
 	for _, s := range strSplit {
 		if s == "|" {
 			continue
 		}
-		s = stringTrims(s)
+		for i := 0; i < len(exceptionChar); i++ {
+			s = strings.ReplaceAll(s, string(exceptionChar[i]), "_")
+		}
 
 		title += "_" + s
 	}
@@ -23,15 +26,4 @@ func TitleCreator(i int, str string) string {
 	title += ".md"
 
 	return title
-}
-
-func stringTrims(s string) string {
-	exceptionChar := "+=[]:;«,./? |_-()\\'"
-	fmt.Println("Before: ", s)
-	for i := 0; i < len(exceptionChar); i++ {
-		s = strings.Trim(s, string(exceptionChar[i]))
-	}
-
-	fmt.Println("After: ", s)
-	return s
 }
