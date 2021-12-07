@@ -19,6 +19,9 @@ func main() {
 	// curlTest()
 	kubernetesTest()
 	// testUtil()
+
+	// s := "\t"
+	// utils.CheckString(s)
 }
 
 func curlTest() {
@@ -37,8 +40,6 @@ func kubernetesTest() {
 
 	var i = 0
 	semaphore := make(chan int, 10)
-	// ctx, cancel := context.WithCancel(context.Background())
-	// defer cancel()
 
 	for _, link := range articleLinks {
 		semaphore <- 1
@@ -63,9 +64,10 @@ func kubernetesTest() {
 
 	// TEST
 	// var article = parsers.Article{}
-	// articleURL := "https://kubernetes.io/blog/2020/04/01/kubernetes-1-18-feature-topoloy-manager-beta"
+	// articleURL := "https://kubernetes.io/blog/2016/07/Bringing-End-To-End-Kubernetes-Testing-To-Azure-2/"
 	// doc, _ := curl.GetHtmlNode(articleURL)
 	// kubernetes.ParserArticle(articleURL, doc, &article)
+	// articles = append(articles, article)
 	//
 
 	fmt.Println("Articles count: ", len(articles))

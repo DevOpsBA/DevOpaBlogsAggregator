@@ -1,15 +1,18 @@
 package utils
 
-import "golang.org/x/net/html"
+import (
+	"golang.org/x/net/html"
+)
 
 func ConvertHTMLToMD(n *html.Node) string {
 	var content string
 
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
 		if c.Type == html.TextNode {
-			if c.Data != "" && c.Data != "\n" && c.Data != "\t" {
+			if CheckString(c.Data) {
 				content += c.Data
 			}
+
 		} else if c.Type == html.ElementNode {
 			switch c.Data {
 			case "strong":
@@ -38,4 +41,14 @@ func ConvertHTMLToMD(n *html.Node) string {
 		}
 	}
 	return content
+}
+
+func CheckString(s string) bool {
+	// * Retern false if string contains ONLY " ", "\n", "\t"
+	for _, v := range s {
+		if v != 9 && v != 10 && v != 32 {
+			return true
+		}
+	}
+	return false
 }
