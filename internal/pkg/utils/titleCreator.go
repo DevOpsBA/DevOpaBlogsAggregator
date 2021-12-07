@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -12,11 +11,11 @@ func TitleCreator(i int, str string) string {
 	title := strconv.Itoa(i)
 
 	for _, s := range strSplit {
-		if s == "|" {
+		s = stringDeleteExtraChar(s)
+
+		if s == "" {
 			continue
 		}
-		s = stringTrims(s)
-
 		title += "_" + s
 	}
 
@@ -25,13 +24,10 @@ func TitleCreator(i int, str string) string {
 	return title
 }
 
-func stringTrims(s string) string {
-	exceptionChar := "+=[]:;«,./? |_-()\\'"
-	fmt.Println("Before: ", s)
+func stringDeleteExtraChar(s string) string {
+	exceptionChar := "+=[]:;«,./? |_-()@#'"
 	for i := 0; i < len(exceptionChar); i++ {
-		s = strings.Trim(s, string(exceptionChar[i]))
+		s = strings.ReplaceAll(s, string(exceptionChar[i]), "")
 	}
-
-	fmt.Println("After: ", s)
 	return s
 }
