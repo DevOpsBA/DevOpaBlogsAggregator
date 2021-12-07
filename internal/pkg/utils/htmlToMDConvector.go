@@ -34,7 +34,14 @@ func ConvertHTMLToMD(n *html.Node) string {
 				content += ConvertHTMLToMD(c) + "\n"
 			case "pre":
 				content += ConvertHTMLToMD(c)
+			case "header":
+				content += "HEADER"
+			case "div":
+				content += "DIV"
+			case "h1":
+				content += "H1"
 			}
+
 		}
 	}
 	return content
